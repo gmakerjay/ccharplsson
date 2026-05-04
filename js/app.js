@@ -27,10 +27,10 @@ document.addEventListener('DOMContentLoaded', () => {
         lessonBody: document.getElementById('lesson-body'),
         
         conceptNote: document.getElementById('concept-note'),
-        conceptNoteContent: document.getElementById('concept-note-content'),
+        conceptNoteContent: document.getElementById('concept-note-text'),
         
-        realUseCase: document.getElementById('real-use-case'),
-        realUseCaseContent: document.getElementById('real-use-case-content'),
+        realUseCase: document.getElementById('real-usecase'),
+        realUseCaseContent: document.getElementById('real-usecase-text'),
         
         exercisesSection: document.getElementById('exercises-section'),
         exercisesContainer: document.getElementById('exercises-container'),
@@ -55,6 +55,14 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!allLessons || allLessons.length === 0) {
             elements.curriculumNav.innerHTML = '<p style="padding: 1rem; color: #94a3b8;">Loading curriculum data...</p>';
             return;
+        }
+        // Inject exercises from expansion scripts
+        if (window.exerciseExpansion) {
+            allLessons.forEach(lesson => {
+                if (window.exerciseExpansion[lesson.id]) {
+                    lesson.exercises = window.exerciseExpansion[lesson.id];
+                }
+            });
         }
         
         renderSidebar();
