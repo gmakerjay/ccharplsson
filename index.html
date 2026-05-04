@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C# Mastery: From Beginner to Pro</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Sarabun:wght@300;400;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h2><i class="fa-brands fa-microsoft"></i> C# Mastery</h2>
+                <button class="mobile-toggle" id="mobile-toggle"><i class="fa-solid fa-bars"></i></button>
+            </div>
+            
+            <div class="progress-container sidebar-progress">
+                <div class="progress-info">
+                    <span id="overall-progress-text">0% Completed</span>
+                </div>
+                <div class="progress-bar-bg">
+                    <div class="progress-bar-fill" id="overall-progress-fill"></div>
+                </div>
+            </div>
+
+            <div class="search-box">
+                <input type="text" id="lesson-search" placeholder="Search lessons...">
+                <i class="fa-solid fa-search"></i>
+            </div>
+            
+            <div style="padding: 1rem 1.5rem; border-bottom: 1px solid var(--border-color);">
+                <button class="btn btn-secondary" id="library-hub-btn" style="width: 100%; font-size: 0.85rem;"><i class="fa-solid fa-book-bookmark"></i> Library Reference Hub</button>
+            </div>
+
+            <nav class="curriculum-nav" id="curriculum-nav">
+                <!-- Modules and lessons will be injected here -->
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="topbar">
+                <button class="sidebar-toggle" id="sidebar-toggle"><i class="fa-solid fa-bars"></i></button>
+                <div class="topbar-actions">
+                    <button id="theme-toggle" class="btn-icon" title="Toggle Theme" style="display:none;"><i class="fa-solid fa-moon"></i></button>
+                </div>
+            </header>
+
+            <div class="lesson-container" id="lesson-container">
+                <!-- Welcome Screen -->
+                <div id="welcome-screen" class="welcome-screen">
+                    <i class="fa-brands fa-microsoft giant-icon"></i>
+                    <h1>Welcome to C# Mastery</h1>
+                    <p>The ultimate full-stack learning platform for C# (C-Sharp) in Thai language.</p>
+                    <button class="btn btn-primary btn-large" id="start-learning-btn">Start Learning</button>
+                </div>
+
+                <!-- Lesson Content (Hidden initially) -->
+                <article id="lesson-view" class="lesson-view hidden">
+                    <div class="lesson-header">
+                        <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                            <span class="module-badge" id="lesson-module-badge">Module 1</span>
+                            <span class="module-badge library-badge hidden" id="lesson-library-badge" style="background-color: rgba(245, 158, 11, 0.1); color: var(--accent-warning);" title="Namespace used in this lesson"></span>
+                        </div>
+                        <h1 id="lesson-title">Lesson Title</h1>
+                    </div>
+
+                    <div class="lesson-objectives" id="lesson-objectives">
+                        <h3><i class="fa-solid fa-bullseye"></i> Learning Objectives</h3>
+                        <ul id="objectives-list"></ul>
+                    </div>
+
+                    <div class="lesson-body" id="lesson-body">
+                        <!-- Content injected here -->
+                    </div>
+
+                    <div class="concept-note" id="concept-note" style="display: none;">
+                        <h3><i class="fa-solid fa-lightbulb"></i> Concept Notes & Common Mistakes</h3>
+                        <div id="concept-note-content"></div>
+                    </div>
+
+                    <div class="real-use-case" id="real-use-case" style="display: none;">
+                        <h3><i class="fa-solid fa-briefcase"></i> Real-world Use Case</h3>
+                        <div id="real-use-case-content"></div>
+                    </div>
+
+                    <div class="exercises-section" id="exercises-section" style="display: none;">
+                        <h2><i class="fa-solid fa-dumbbell"></i> Exercises & Challenges</h2>
+                        <div id="exercises-container"></div>
+                    </div>
+
+                    <div class="quiz-section" id="quiz-section" style="display: none;">
+                        <h2><i class="fa-solid fa-clipboard-question"></i> Knowledge Check (Quiz)</h2>
+                        <div id="quiz-container"></div>
+                    </div>
+
+                    <div class="lesson-actions">
+                        <button class="btn btn-secondary" id="prev-lesson-btn"><i class="fa-solid fa-arrow-left"></i> Previous Lesson</button>
+                        <button class="btn btn-success" id="mark-complete-btn"><i class="fa-solid fa-check"></i> Mark as Completed</button>
+                        <button class="btn btn-primary" id="next-lesson-btn">Next Lesson <i class="fa-solid fa-arrow-right"></i></button>
+                    </div>
+                </article>
+            </div>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/data_part1.js"></script>
+    <script src="js/data_part2.js"></script>
+    <script src="js/data_part3.js"></script>
+    <script src="js/data_part4.js"></script>
+    <script src="js/data_part5.js"></script>
+    <script src="js/exercises_expansion.js"></script>
+    <script src="js/exercises_p2.js"></script>
+    <script src="js/exercises_p3.js"></script>
+    <script src="js/exercises_p4.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
