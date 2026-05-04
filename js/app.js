@@ -41,6 +41,13 @@ document.addEventListener('DOMContentLoaded', () => {
         prevBtn: document.getElementById('prev-lesson-btn'),
         nextBtn: document.getElementById('next-lesson-btn'),
         markCompleteBtn: document.getElementById('mark-complete-btn'),
+        
+        exCount: document.getElementById('ex-count'),
+        debugContainer: document.getElementById('debug-container'),
+        projectContainer: document.getElementById('project-container'),
+        tabExercises: document.getElementById('tab-exercises'),
+        tabDebug: document.getElementById('tab-debug'),
+        tabProject: document.getElementById('tab-project')
     };
 
     // Initialize App
@@ -166,6 +173,20 @@ document.addEventListener('DOMContentLoaded', () => {
             elements.lessonLibraryBadge.classList.add('hidden');
         }
         
+        // Reset Tabs
+        document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+        document.querySelectorAll('.tab-pane').forEach(pane => {
+            pane.classList.remove('active');
+            pane.classList.add('hidden');
+        });
+        const firstTab = document.querySelector('[data-tab="tab-content"]');
+        if (firstTab) firstTab.classList.add('active');
+        const firstPane = document.getElementById('tab-content');
+        if (firstPane) {
+            firstPane.classList.remove('hidden');
+            firstPane.classList.add('active');
+        }
+        
         // Objectives
         elements.objectivesList.innerHTML = '';
         lesson.objectives.forEach(obj => {
@@ -198,6 +219,16 @@ document.addEventListener('DOMContentLoaded', () => {
                     <pre><code>${highlightCode(block.code)}</code></pre>
                 `;
                 elements.lessonBody.appendChild(wrapper);
+            } else if (block.type === 'dev_think') {
+                const devBox = document.createElement('div');
+                devBox.className = 'dev-think-box';
+                devBox.innerHTML = `<h3><i class="fa-solid fa-brain"></i> How a developer thinks</h3><p>${block.text}</p>`;
+                elements.lessonBody.appendChild(devBox);
+            } else if (block.type === 'library_use') {
+                const libBox = document.createElement('div');
+                libBox.className = 'library-real-use';
+                libBox.innerHTML = `<h3><i class="fa-solid fa-box-open"></i> Library in Real Use</h3><p>${block.text}</p>`;
+                elements.lessonBody.appendChild(libBox);
             }
         });
 
@@ -219,7 +250,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Exercises
         if (lesson.exercises && lesson.exercises.length > 0) {
-            elements.exercisesSection.style.display = 'block';
+            elements.exCount.textContent = lesson.exercises.length;
+            document.querySelector('[data-tab="tab-exercises"]').style.display = 'inline-block';
             elements.exercisesContainer.innerHTML = '';
             
             lesson.exercises.forEach((ex, idx) => {
@@ -284,7 +316,56 @@ document.addEventListener('DOMContentLoaded', () => {
                 elements.exercisesContainer.appendChild(card);
             });
         } else {
-            elements.exercisesSection.style.display = 'none';
+            elements.exCount.textContent = '0';
+            document.querySelector('[data-tab="tab-exercises"]').style.display = 'none';
+        }
+
+        // Debug Lab
+        if (lesson.debugLab && lesson.debugLab.length > 0) {
+            document.querySelector('[data-tab="tab-debug"]').style.display = 'inline-block';
+            elements.debugContainer.innerHTML = '';
+            
+            lesson.debugLab.forEach((bug, idx) => {
+                const bugCard = document.createElement('div');
+                bugCard.className = 'debug-lab-box';
+                bugCard.innerHTML = `
+                    <h3><i class="fa-solid fa-bug"></i> Scenario ${idx + 1}: ${bug.scenario}</h3>
+                    ${bug.errorLog ? `<div class="code-block" style="background-color: #2a1215; border: 1px solid #7f1d1d; margin-bottom: 1rem;"><pre style="color: #fca5a5;"><code>${bug.errorLog}</code></pre></div>` : ''}
+                    <div class="code-block" style="margin-bottom: 1rem;"><pre><code>${highlightCode(bug.code)}</code></pre></div>
+                    <p><strong><i class="fa-solid fa-crosshairs"></i> Task:</strong> ${bug.task}</p>
+                    <button class="btn btn-danger reveal-bug-btn" style="margin-top: 1rem;"><i class="fa-solid fa-wrench"></i> Show Fix</button>
+                    <div class="bug-solution hidden" style="margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px dashed rgba(239, 68, 68, 0.3);">
+                        <div class="code-block"><pre><code>${highlightCode(bug.solutionCode)}</code></pre></div>
+                        <p style="margin-top: 1rem;"><strong>Why it failed:</strong> ${bug.explanation}</p>
+                    </div>
+                `;
+                
+                const revealBtn = bugCard.querySelector('.reveal-bug-btn');
+                const solutionDiv = bugCard.querySelector('.bug-solution');
+                revealBtn.addEventListener('click', () => {
+                    solutionDiv.classList.toggle('hidden');
+                });
+                
+                elements.debugContainer.appendChild(bugCard);
+            });
+        } else {
+            document.querySelector('[data-tab="tab-debug"]').style.display = 'none';
+        }
+
+        // Job Task / Project
+        if (lesson.jobTask) {
+            document.querySelector('[data-tab="tab-project"]').style.display = 'inline-block';
+            elements.projectContainer.innerHTML = `
+                <div class="job-task-box">
+                    <h3><i class="fa-solid fa-briefcase"></i> Task: ${lesson.jobTask.title}</h3>
+                    <p>${lesson.jobTask.description}</p>
+                    <hr style="border-color: rgba(16, 185, 129, 0.2); margin: 1rem 0;">
+                    <p><strong>Requirements:</strong></p>
+                    <ul>${lesson.jobTask.requirements.map(r => `<li>${r}</li>`).join('')}</ul>
+                </div>
+            `;
+        } else {
+            document.querySelector('[data-tab="tab-project"]').style.display = 'none';
         }
 
         // Quiz
@@ -534,6 +615,26 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         
         elements.markCompleteBtn.addEventListener('click', toggleMarkComplete);
+        
+        // Tab Listeners
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const targetId = btn.getAttribute('data-tab');
+                
+                document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+                document.querySelectorAll('.tab-pane').forEach(p => {
+                    p.classList.remove('active');
+                    p.classList.add('hidden');
+                });
+                
+                btn.classList.add('active');
+                const targetPane = document.getElementById(targetId);
+                if (targetPane) {
+                    targetPane.classList.remove('hidden');
+                    targetPane.classList.add('active');
+                }
+            });
+        });
         
         // Allow using lesson-container directly
         elements.lessonContainer = document.getElementById('lesson-container');

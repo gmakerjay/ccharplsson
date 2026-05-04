@@ -10,21 +10,43 @@ const part1 = [
         objectives: ["เข้าใจว่า C# และ .NET คืออะไร", "โครงสร้างของโปรแกรม C# พื้นฐาน", "เขียนโปรแกรม Hello World"],
         content: [
             { type: "text", text: "ยินดีต้อนรับสู่โลกของ <strong>C# (C-Sharp)</strong> ครับ! C# เป็นภาษาโปรแกรมมิ่งแบบ Object-Oriented (เชิงวัตถุ) ที่พัฒนาโดย Microsoft" },
-            { type: "heading", text: "📦 Library: System" },
-            { type: "text", text: "<ul><li>เป็นไลบรารีหลักของ .NET เปรียบเสมือนกล่องเครื่องมือช่างที่ต้องพกติดตัวเสมอ</li><li>ใช้สำหรับฟังก์ชันพื้นฐานของคอมพิวเตอร์ เช่น การพิมพ์ข้อความลงหน้าจอ (Console), การคิดเลข (Math), หรือดูข้อมูลระบบ (Environment)</li><li>คุณจะเห็นคำว่า <code>using System;</code> อยู่บนสุดของไฟล์ C# เสมอเพื่อขอเบิกกล่องเครื่องมือนี้มาใช้</li></ul>" },
+            { type: "library_use", text: "<strong>Namespace System</strong> ไม่ใช่แค่วิชาเรียนพื้นฐาน แต่ในชีวิตจริง (Production) System เป็นศูนย์กลางของทุกอย่าง ไม่ว่าคุณจะสร้างเว็บ API หรือเกม Unity ถ้าคุณจะพิมพ์ Log เพื่อสืบหา Bug (Console.WriteLine), ถ้าคุณจะจับเวลา Execution (Environment.TickCount), ทุกอย่างนี้ดึงมาจาก System ทั้งสิ้น! คุณไม่มีทางหนีพ้นมันได้" },
             { type: "heading", text: "โครงสร้างโปรแกรม (Program Structure)" },
             { type: "text", text: "โปรแกรม C# จะต้องมีโครงสร้างพื้นฐานเสมอ เริ่มจาก <code>using</code> เพื่อดึงไลบรารีที่จำเป็นมาใช้, <code>namespace</code> เพื่อจัดกลุ่มคลาส, <code>class</code> เป็นพิมพ์เขียวของโปรแกรม, และ <code>Main()</code> method ซึ่งเป็นจุดเริ่มต้นการทำงาน (Entry Point)" },
-            { type: "code", code: `using System;\n\nnamespace HelloWorldApp\n{\n    class Program\n    {\n        static void Main(string[] args)\n        {\n            // Console.WriteLine() มาจาก System namespace ใช้แสดงข้อความออกทางหน้าจอดำ (Terminal)\n            Console.WriteLine("Hello, World!");\n        }\n    }\n}` }
+            { type: "code", code: `using System;\n\nnamespace HelloWorldApp\n{\n    class Program\n    {\n        static void Main(string[] args)\n        {\n            // Console.WriteLine() มาจาก System namespace ใช้แสดงข้อความออกทางหน้าจอดำ (Terminal)\n            Console.WriteLine("Hello, World!");\n        }\n    }\n}` },
+            { type: "dev_think", text: "ทำไมโปรแกรมเมอร์ถึงต้องบังคับจัดกลุ่มโค้ดลงใน <code>namespace</code>? <br>เวลาคุณทำงานในทีมที่มีคน 10 คน และทุกคนต่างตั้งชื่อคลาสว่า <code>User</code> คลาสนี้จะชนกัน (Name collision) ทันที! การสร้าง <code>namespace PaymentModule</code> กับ <code>namespace AuthModule</code> จะช่วยให้คลาส User 2 ตัวนี้อยู่ร่วมกันได้ นี่คือสถาปัตยกรรมระดับพื้นฐานที่สุดของการสเกลโปรเจกต์ใหญ่ๆ" }
         ],
-        conceptNote: "มือใหม่มักลืมใส่ <code>;</code> (Semicolon) ที่ท้ายบรรทัด ซึ่งใน C# ทุกคำสั่ง (Statement) จะต้องจบด้วยเครื่องหมาย <code>;</code> เสมอ และ C# เป็นภาษาแบบ Case-Sensitive แปลว่า <code>console</code> กับ <code>Console</code> คือคนละตัวกัน! (ถ้าพิมพ์ผิด Compiler จะด่าว่า 'The name console does not exist in the current context')",
-        exercises: [
-            { level: "Easy", instruction: "จงเขียนโปรแกรมเพื่อแสดงชื่อของตัวเองออกทางหน้าจอ (Console)", answer: `using System;\n\nclass Program {\n    static void Main() {\n        Console.WriteLine("My name is John Doe");\n    }\n}` },
-            { level: "Medium", instruction: "Debug โค้ด: ทำไมโค้ด `System.out.println(\"Hello\");` ถึงรันไม่ผ่านใน C#?", answer: "เพราะนั่นคือคำสั่งของภาษา Java! ใน C# ต้องใช้ `System.Console.WriteLine(\"Hello\");` หรือ `Console.WriteLine()` ถ้าระบุ `using System;` ไว้แล้ว" }
+        conceptNote: "มือใหม่มักลืมใส่ <code>;</code> (Semicolon) ที่ท้ายบรรทัด ซึ่งใน C# ทุกคำสั่ง (Statement) จะต้องจบด้วยเครื่องหมาย <code>;</code> เสมอ และ C# เป็นภาษาแบบ Case-Sensitive แปลว่า <code>console</code> กับ <code>Console</code> คือคนละตัวกัน!",
+        exercises: [], // Will be injected by expansion script
+        debugLab: [
+            {
+                scenario: "ลูกค้ารายงานว่า Server Console แจ้ง Error ตอน Startup และโปรแกรมรันไม่ขึ้น",
+                errorLog: "error CS0103: The name 'console' does not exist in the current context",
+                code: "using System;\nclass App {\n    static void Main() {\n        console.WriteLine(\"Server Started.\");\n    }\n}",
+                task: "ตรวจสอบสาเหตุการ Compile พังและแก้ไขโค้ดให้โปรแกรมสามารถ Startup ได้",
+                solutionCode: "using System;\nclass App {\n    static void Main() {\n        Console.WriteLine(\"Server Started.\");\n    }\n}",
+                explanation: "C# เป็นภาษา Case-Sensitive การใช้ 'console' (ตัว c เล็ก) ทำให้ Compiler มองไม่เห็น System.Console (ตัว C ใหญ่) นี่คือ Bug พิมพ์ผิดที่พบบ่อยที่สุดและอาจทำให้ Deployment CI/CD Pipeline ล้มเหลวได้ทันที"
+            },
+            {
+                scenario: "เพิ่มฟีเจอร์ลงในหน้า Login แต่โปรแกรมหลุดเด้งออกตอนพิมพ์ข้อความ",
+                errorLog: "error CS1002: ; expected",
+                code: "using System;\nclass App {\n    static void Main() {\n        Console.WriteLine(\"Enter Password\")\n        Console.ReadLine();\n    }\n}",
+                task: "ค้นหาจุดที่หายไปและเติมให้สมบูรณ์เพื่อให้ระบบ Login กลับมาทำงาน",
+                solutionCode: "using System;\nclass App {\n    static void Main() {\n        Console.WriteLine(\"Enter Password\");\n        Console.ReadLine();\n    }\n}",
+                explanation: "เมื่อลืม Semicolon (;) ที่ท้ายบรรทัด Compiler จะอ่านโค้ดบรรทัดต่อไปรวมเข้ามาเป็นประโยคเดียวกัน ทำให้โครงสร้างคำสั่งพังทั้งหมด การมี ; ช่วยขีดเส้นจบประโยคคำสั่งให้ CPU เข้าใจได้ชัดเจน"
+            }
         ],
-        quiz: [
-            { question: "Method ใดใน System.Console ที่ใช้แสดงผลแบบพิมพ์แล้วขึ้นบรรทัดใหม่ทันที?", options: ["Console.Write()", "Console.Print()", "Console.WriteLine()", "Console.Show()"], answerIndex: 2, explanation: "WriteLine จะเพิ่มอักขระขึ้นบรรทัดใหม่ (\\n) ต่อท้ายข้อความให้อัตโนมัติ" }
-        ],
-        realUseCase: "ในโปรเจกต์จริง โครงสร้าง <code>namespace</code> จะช่วยแยกแยะว่าคลาสนี้อยู่ในส่วนไหนของโปรแกรม เช่น <code>MyApp.Models</code> หรือ <code>MyApp.Controllers</code> ช่วยให้โค้ดเป็นระเบียบเมื่อแอปมีขนาดใหญ่ขึ้น (ป้องกันการตั้งชื่อคลาสซ้ำกัน)"
+        jobTask: {
+            title: "Build the Boot sequence of an ATM Machine",
+            description: "คุณได้รับมอบหมายให้เขียนโปรแกรมเพื่อจำลองหน้าจอแรกเริ่ม (Boot sequence) ของระบบตู้ ATM",
+            requirements: [
+                "สร้างคลาสชื่อ ATMBoot",
+                "มีเมธอด Main เป็นจุดเริ่มต้น",
+                "ล้างหน้าจอก่อนเป็นอันดับแรก (Console.Clear)",
+                "แสดงข้อความ 'ATM System Booting...' และ 'Loading Security Module...'"
+            ]
+        },
+        realUseCase: "ในโปรเจกต์จริง โครงสร้าง <code>namespace</code> จะช่วยแยกแยะว่าคลาสนี้อยู่ในส่วนไหนของโปรแกรม เช่น <code>MyApp.Models</code> หรือ <code>MyApp.Controllers</code> ช่วยให้โค้ดเป็นระเบียบเมื่อแอปมีขนาดใหญ่ขึ้น"
     },
     {
         id: 2,

@@ -658,3 +658,107 @@ p code, li code {
         justify-content: center;
     }
 }
+
+/* Tabs UI */
+.tab-btn {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    font-size: 1.05rem;
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    font-weight: bold;
+    transition: all 0.2s;
+    white-space: nowrap;
+}
+
+.tab-btn:hover {
+    background-color: var(--bg-surface);
+    color: var(--text-primary);
+}
+
+.tab-btn.active {
+    background-color: var(--accent-primary);
+    color: white;
+}
+
+.tab-pane {
+    display: none;
+    animation: fadeIn 0.3s ease-out;
+}
+
+.tab-pane.active {
+    display: block;
+}
+
+.badge {
+    background-color: rgba(255, 255, 255, 0.2);
+    padding: 0.1rem 0.5rem;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    margin-left: 0.25rem;
+}
+
+/* Dev thinking / Job simulation boxes */
+.dev-think-box {
+    background-color: rgba(139, 92, 246, 0.1);
+    border-left: 4px solid #8b5cf6;
+    padding: 1.5rem;
+    border-radius: 0 8px 8px 0;
+    margin: 1.5rem 0;
+}
+.dev-think-box h3 { color: #8b5cf6; margin-bottom: 0.5rem; }
+
+.debug-lab-box {
+    background-color: rgba(239, 68, 68, 0.05);
+    border: 1px solid rgba(239, 68, 68, 0.2);
+    border-left: 4px solid var(--accent-danger);
+    padding: 1.5rem;
+    border-radius: 0 8px 8px 0;
+    margin: 1.5rem 0;
+}
+
+.job-task-box {
+    background-color: rgba(16, 185, 129, 0.05);
+    border: 1px solid rgba(16, 185, 129, 0.2);
+    border-left: 4px solid var(--accent-success);
+    padding: 1.5rem;
+    border-radius: 0 8px 8px 0;
+    margin: 1.5rem 0;
+}
+
+.library-real-use {
+    background-color: rgba(245, 158, 11, 0.1);
+    border-left: 4px solid var(--accent-warning);
+    padding: 1.5rem;
+    border-radius: 0 8px 8px 0;
+    margin: 1.5rem 0;
+}
+.library-real-use h3 { color: var(--accent-warning); margin-bottom: 0.5rem; }
+
+/* Skills Tracker Sidebar */
+.skill-bar {
+    margin-bottom: 0.75rem;
+}
+
+.skill-label {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    margin-bottom: 0.25rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.progress-bar {
+    height: 6px;
+    background-color: var(--bg-elevated);
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    border-radius: 3px;
+    transition: width 0.5s ease-out;
+}
